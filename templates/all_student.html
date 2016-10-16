@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+{% extends 'layout.html' %}
+{% block body %}
+    <h2>{{title}}</h2>
+    <br>
+    <ul>
+        {% for student in student_list %}
+        <li>
+        {{student.name}}
+        <a href = "/update_student?id={{student.id}}">Update</a>
+        <a href = "/delete_student?id={{student.id}}">Delete</a>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% extends 'layout.html' %}
+{% block body %}
+<form action="/add_the_student" method="POST">
+    <p>Name</p>
+    <br>
+    <input type="text" name="name">
+    <br>
+    <p>Website</p>
+    <br>
+    <input type="text" name="website">
+    <br>
+    <p>git_user</p>
+    <br>
+    <input type="text" name="git_user">
+    <br>
+    <button type="submit" name="submit">Add student</button>
+</form>
+{% endblock %}
