@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% extends 'layout.html' %}
+{% block body %}
+<h2>{{title}}</h2>
+<br>
+<form class="" action="/user_login" method="post">
+    <br>
+    <p>Name</p>
+    <input type="text" name="user_name" value="">
+    <br>
+    <p>Password</p>
+    <input type="password" name="password" value="">
+    <br>
+    <button type="submit" name="button">Log in</button>
+</form>
+{% endblock %}

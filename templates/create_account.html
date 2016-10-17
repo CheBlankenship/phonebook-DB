@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% extends 'layout.html'%}
+{% block body %}
+<br>
+<h3>{{title}}</h3>
+<br>
+<form class="" action="/create_account" method="post">
+    <br>
+    <p>Name</p>
+    <input type="text" name="name" value="">
+    <br>
+    <p>Password</p>
+    <input type="password" name="password" value="">
+    <button type="submit" name="button">Create your account</button>
+</form>
+{% endblock %}

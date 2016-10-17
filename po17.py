@@ -1,8 +1,9 @@
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, session
 import pg
 
 app = Flask('phonebook-16')
 db = pg.DB(dbname='student_db')
+app.secret_key = "check"
 
 ###### HOME #####
 @app.route('/')
@@ -82,6 +83,56 @@ def delete_student():
             }
     )
     return redirect('/')
+
+
+#### CREATE A ACCOUNT ####
+@app.route('/new_account')
+def new_account():
+    return render_template(
+        'create_account.html',
+        title = 'Create account'
+    )
+
+@app.route('/create_account', methods=['POST'])
+def create_account():
+    user_name = request.form.get('name')
+    password = request.form.get('password')
+    db.insert(
+        'account',{
+            'user_name': user_name,
+            'password': password
+        }
+    )
+    return redirect('/')
+
+### LOG IN TO USER PAGE ####
+@app.route('/login')
+def login():
+    return render_template(
+        'user_login.html',
+        title = 'Log in page'
+    )
+
+@app.route('/user_login', methods =['POST'])
+def user_login():
+    user_name = request.form.get('user_name')
+    password = request.form.get('password')
+    query = db.query("select * from account where user_name = '%s'" % user_name).namedresult()
+    if len(query) > 0:
+        account_list_first = query[0]
+        if account_list_first.password == password:
+            session['user_name'] = user_name
+            return render_template(
+                'personal_page.html'
+                )
+        else:
+            return redirect('/')
+    else:
+        return redirect('/')
+
+
+
+
 
 
 if __name__ == '__main__':
